@@ -1,0 +1,27 @@
+{
+  "summary": "A 48-year-old patient has chest pain and sweating.",
+  "visible_symptoms": ["chest pain", "sweating"],
+  "available_actions": [
+    "ask_duration",
+    "check_vitals",
+    "recommend_test",
+    "route_emergency",
+    "route_opd",
+    "final_decision",
+    "declare_done"
+  ],
+  "max_turns": 6,
+  "correct_tests": ["ecg"],
+  "correct_route": "route_emergency",
+  "required_steps": [
+    "ask_duration_done",
+    "check_vitals_done",
+    "recommend_test_done",
+    "route_emergency_done",
+    "final_decision_done"
+  ],
+  "responses": {
+    "ask_duration": "Pain started 30 minutes ago and is increasing.",
+    "check_vitals": "BP 150/95, pulse 118, oxygen 96%."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "summary": "A 22-year-old patient has fever and weakness.",
+  "visible_symptoms": ["fever", "weakness"],
+  "available_actions": [
+    "ask_duration",
+    "check_vitals",
+    "recommend_test",
+    "route_emergency",
+    "route_opd",
+    "final_decision",
+    "declare_done"
+  ],
+  "max_turns": 5,
+  "correct_tests": ["cbc"],
+  "correct_route": "route_opd",
+  "required_steps": [
+    "ask_duration_done",
+    "check_vitals_done",
+    "route_opd_done",
+    "final_decision_done"
+  ],
+  "responses": {
+    "ask_duration": "Symptoms began 2 days ago and are stable.",
+    "check_vitals": "BP 110/70, pulse 82, oxygen 99%."
+  }
+}

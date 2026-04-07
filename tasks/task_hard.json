@@ -1,0 +1,27 @@
+{
+  "summary": "A 67-year-old patient has slurred speech and one-sided weakness.",
+  "visible_symptoms": ["slurred speech", "one-sided weakness"],
+  "available_actions": [
+    "ask_duration",
+    "check_vitals",
+    "recommend_test",
+    "route_emergency",
+    "route_opd",
+    "final_decision",
+    "declare_done"
+  ],
+  "max_turns": 6,
+  "correct_tests": ["brain imaging"],
+  "correct_route": "route_emergency",
+  "required_steps": [
+    "ask_duration_done",
+    "check_vitals_done",
+    "recommend_test_done",
+    "route_emergency_done",
+    "final_decision_done"
+  ],
+  "responses": {
+    "ask_duration": "Symptoms started suddenly 20 minutes ago.",
+    "check_vitals": "BP 170/100, pulse 104, oxygen 95%."
+  }
+}
