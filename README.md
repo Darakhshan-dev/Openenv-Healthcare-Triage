@@ -31,16 +31,3 @@ task_hard:   check_vitals → route_emergency → declare_done (1.00)
 🔒 Security: Space Secrets (OPENAI_API_KEY)
 🐍 Code: Python 3.11 + asyncio + OpenAI SDK
 
-## ✨ Key Features
-- **Perfect 3/3 task success** - Clinical-grade triage agent
-- **Production OpenAI integration** via Space secrets
-- **Async RL environment** handling with proper error recovery
-- **Clinical workflow compliance** - Vitals → Test → Decision → Done
-- **Leaderboard-ready** clean logging format
-- **Zero-downtime** Space deployments
-
- Setup & Deployment
-1. **Space Secrets**: `OPENAI_API_KEY`, `API_BASE_URL`, `MODEL_NAME`
-2. **No local `.env`** - Uses Hugging Face production secrets
-3. **Auto-scales** with Space hardware
-4. **Push to deploy**: `git push hf main`
