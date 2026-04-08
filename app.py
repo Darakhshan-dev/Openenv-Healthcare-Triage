@@ -1,52 +1,35 @@
+import asyncio
 import gradio as gr
-import os
-import sys
 from io import StringIO
 import contextlib
-from inference import run_task, TASKS  # Your working inference logic
+from inference import main
 
-def capture_inference():
-    """Capture real inference output and return it"""
-    old_stdout = sys.stdout
-    sys.stdout = captured_output = StringIO()
-    
+def run_all_tasks():
+    buffer = StringIO()
     try:
-        print("🏥 Running Healthcare Triage Agent...")
-        print("=" * 50)
-        for task in TASKS:
-            print(f"\n[START] Running {task}...")
-            run_task(task)
-        print("\n✅ All tasks completed successfully!")
-    finally:
-        sys.stdout = old_stdout
-        output = captured_output.getvalue()
-        return output
+        with contextlib.redirect_stdout(buffer):
+            asyncio.run(main())
+    except Exception as e:
+        print(f"[ERROR] {e}")
+    return buffer.getvalue()
 
 with gr.Blocks(title="Healthcare Triage OpenEnv") as demo:
     gr.Markdown("# 🏥 Healthcare Triage OpenEnv")
-    gr.Markdown("**Perfect 1.00 scores across easy/medium/hard tasks**")
-    gr.Markdown("Click below to run the complete agent baseline.")
-    
-    with gr.Row():
-        run_btn = gr.Button("🚀 Run All Tasks", variant="primary", size="lg")
-    
+    gr.Markdown("Run the complete inference pipeline below.")
+
+    run_btn = gr.Button("🚀 Run All Tasks", variant="primary")
     output = gr.Textbox(
-        label="Agent Output", 
-        lines=25, 
+        label="Agent Output",
+        lines=25,
         max_lines=30,
-        placeholder="Click 'Run All Tasks' to see real inference output..."
+        placeholder="Click the button to run inference..."
     )
-    
-    # Connect button to real inference
+
     run_btn.click(
-        fn=capture_inference,
+        fn=run_all_tasks,
         outputs=output,
-        show_progress=True
+        api_name="predict"
     )
 
 if __name__ == "__main__":
-    demo.launch(
-        server_name="0.0.0.0", 
-        server_port=7860,
-        share=False
-    )
+    demo.launch(server_name="0.0.0.0", server_port=7860)
