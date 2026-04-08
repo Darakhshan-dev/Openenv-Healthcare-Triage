@@ -7,11 +7,10 @@ from openai import OpenAI
 from env.environment import HealthcareEnv
 from env.models import Action
 
-load_dotenv(".env")
-
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
 API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 TASKS = ["task_easy", "task_medium", "task_hard"]
 BENCHMARK = "healthcare-triage"
