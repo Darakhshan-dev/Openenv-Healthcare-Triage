@@ -1,53 +1,15 @@
 name: healthcare-triage-openenv
+description: Real-world healthcare triage simulation
 version: 1.0.0
-description: Real-world healthcare triage environment with typed models, dense rewards, and graded tasks.
-entrypoint: env.environment:HealthcareEnv
-
-environment:
-  type: openenv
-  domain: healthcare
-  api:
-    reset: reset
-    step: step
-    state: state
-
-models:
-  action: env.models:Action
-  observation: env.models:Observation
-  reward: env.models:Reward
-  state: env.models:State
-  step_result: env.models:StepResult
-
+entrypoint: inference.py
 tasks:
   - id: task_easy
-    file: tasks/task_easy.json
+    description: Basic triage
     difficulty: easy
-    grader: env.grader:grade_task
-
-  - id: task_medium
-    file: tasks/task_medium.json
+  - id: task_medium  
+    description: Urgent triage
     difficulty: medium
-    grader: env.grader:grade_task
-
   - id: task_hard
-    file: tasks/task_hard.json
+    description: Emergency triage
     difficulty: hard
-    grader: env.grader:grade_task
-
-baselines:
-  scripted:
-    file: baseline/scripted_baseline.py
-    reproducible: true
-    seed: 42
-
-  openai:
-    file: baseline/openai_baseline.py
-    reproducible: false
-    requires_env:
-      - OPENAI_API_KEY
-
-deployment:
-  platform: huggingface-spaces
-  sdk: docker
-  app_file: app.py
-  dockerfile: Dockerfile
+tags: [healthcare, triage, openenv]
